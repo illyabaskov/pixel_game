@@ -6,6 +6,7 @@
         <div class="complete_game" v-if="game_complete">
             <div class="cont_wrapper">
             <h2>Well Done!</h2>
+                Start again when close <input type="checkbox" v-model="start_again"><br>
                 <a href="#" class="close" @click.stop.prevent="closePopup">Close</a>
             </div>
         </div>
@@ -63,6 +64,7 @@
         data () {
             return {
                 dimension: 0,
+                start_again: true
             }
         },
         computed: {
@@ -91,8 +93,10 @@
                 this.$store.dispatch('board/generate_start_color');
             },
             closePopup() {
-                console.log('!!');
                 this.$store.commit('board/completeGame', false);
+                if (this.start_again) {
+                    this.$store.dispatch('board/generate_cells', parseInt(this.dimension));
+                }
             }
         },
         mounted() {

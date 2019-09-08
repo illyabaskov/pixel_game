@@ -79,7 +79,6 @@ export default  {
             state.generate_process = state.dimension <= 0;
         },
         completeGame(state, value) {
-            console.log('value: ', value);
             state.game_complete = value;
         }
     }
